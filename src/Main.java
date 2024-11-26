@@ -1,27 +1,29 @@
 public class Main {
 
     public static void main(String[] args) {
-
+        String apiKey = "YOUR_API_KEY_HERE";
         TradingPlatform platform = new TradingPlatform();
 
-        User user1 = new User("U_1", "Sandz", "*******",5000.0);
-        User user2 = new User("U_2", "Kele", "*******",6000.0);
+        platform.getUserManager().register("U_1", "Sandz", "*******",5000.0);
+        platform.getUserManager().register("U_2", "Kele", "*******",6000.0);
 
-        platform.addUser(user1);
-        platform.addUser(user2);
+        User sandz = platform.getUserManager().login("U_1", "*******");
+        User kele = platform.getUserManager().login("U_2", "*******");
 
-        platform.updatePrices();
-        platform.printPrices();
+        if (sandz != null) {
+            System.out.println("Sandz logged in successfully");
+        }
+        if (kele != null) {
+            System.out.println("Sandz logged in successfully");
+        }
 
-        Trades trade1 = new Trades("T_1", "U_1", "GBP/USD", 15, platform.priceService.getPrice("GBP/USD"));
-        Trades trade2 = new Trades("T_2", "U_2", "EUR/USD", 20, platform.priceService.getPrice("EUR/USD"));
+        platform.getUserManager().deposit("U_1", 2500.0);
+        platform.getUserManager().deposit("U_2", 2000.0);
 
-        platform.addTrades(trade1);
-        platform.addTrades(trade2);
+        platform.placeTrades("U_1", "EUR/USD", 1000);
+        platform.placeTrades("U_2", "GBP/USD", 1000);
 
         platform.printUsers();
         platform.printTrades();
-        platform.printTransactionHistory("U_1");
-        platform.printTransactionHistory("U_2");
     }
 }

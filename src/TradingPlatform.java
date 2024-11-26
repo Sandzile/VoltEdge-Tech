@@ -1,50 +1,25 @@
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 public class TradingPlatform {
-    private Map<String, User> users;
+    private UserManager userManager;
     private List<Trades> trades;
-    public PriceService priceService;
-    private TransactionHistory transactionHistory;
+    public MarketDataService marketDataService;
 
     public TradingPlatform() {
-        users = new HashMap<>();
+        userManager = new UserManager();
+        marketDataService = new MarketDataService();
         trades = new ArrayList<>();
-        priceService = new PriceService();
-        transactionHistory = new TransactionHistory();
     }
 
-    public void addUser(User user) {
-        users.put(user.getUserId(), user);
+    public UserManager getUserManager () {
+        return userManager;
     }
 
-    public void addTrades(Trades trade) {
+    public void placeTrades(String userId, String currencyPair, int quantity) {
+        double price = marketDataService.getPrice(currencyPair);
+        Trades trade = new Trades("T" + (trades.size() + 1), userId, currencyPair, quantity, price);
         trades.add(trade);
-        transactionHistory.addTrade(trade);
-    }
-
-    public User getUser(String userId) {
-        return users.get(userId);
-    }
-
-    public List<Trades> getTrades() {
-        return new ArrayList<>(trades);
-    }
-
-    public void updatePrices() {
-        priceService.updatedPrices();
-    }
-
-    public void printPrices() {
-        priceService.printPrices();
-    }
-
-    public void printUsers() {
-        for (User user : users.values()) {
-            System.out.println(user);
-        }
     }
 
     public void printTrades() {
@@ -53,7 +28,7 @@ public class TradingPlatform {
         }
     }
 
-    public void printTransactionHistory(String userId) {
-        transactionHistory.printTransactionHistory(userId);
+    public void printUsers() {
+        userManager.printUsers();
     }
 }

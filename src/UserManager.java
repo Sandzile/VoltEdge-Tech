@@ -41,5 +41,7 @@ public class UserManager {
         }
         return false;
     }
-    // Other methods
+
+    public void printUsers() {
+    }
 }
