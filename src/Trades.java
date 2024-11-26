@@ -4,15 +4,15 @@ public class Trades {
 
     private String tradeId;
     private String userId;
-    private String stockSymbol;
+    private String currencyPair;
     private int quantity;
     private double price;
     private LocalDateTime timestamp;
 
-    public Trades(String tradeId, String userId, String stockSymbol, int quantity, double price) {
+    public Trades(String tradeId, String userId, String currencyPair, int quantity, double price) {
         this.tradeId = tradeId;
         this.userId = userId;
-        this.stockSymbol = stockSymbol;
+        this.currencyPair = currencyPair;
         this.quantity = quantity;
         this.price = price;
         this.timestamp = LocalDateTime.now();
@@ -34,12 +34,12 @@ public class Trades {
         this.userId = userId;
     }
 
-    public String getStockSymbol() {
-        return stockSymbol;
+    public String getCurrencyPair() {
+        return currencyPair;
     }
 
-    public void setStockSymbol(String stockSymbol) {
-        this.stockSymbol = stockSymbol;
+    public void setCurrencyPair(String currencyPair) {
+        this.currencyPair = currencyPair;
     }
 
     public int getQuantity() {
@@ -66,7 +66,7 @@ public class Trades {
     public String toString() {
         return "Trade{" + tradeId + '\'' +
                 ", userId = " + userId + '\'' +
-                ", stockSymbol = " + stockSymbol + '\'' +
+                ", currencyPair = " + currencyPair + '\'' +
                 ", price = " + price +
                 ", timestamp = " + timestamp +
                 '}';

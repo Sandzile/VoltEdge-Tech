@@ -3,7 +3,7 @@ import java.util.Map;
 import java.util.Random;
 
 public class PriceService {
-    private Map < String, Double > prices;
+    private Map <String, Double> prices;
 
     public PriceService() {
         prices = new HashMap<>();
@@ -13,10 +13,14 @@ public class PriceService {
         prices.put("US 100", 21043.2);
     }
 
+    public double getPrice(String currencyPair) {
+        return prices.getOrDefault(currencyPair, 0.0);
+    }
+
     public void updatedPrices() {
         Random rand = new Random();
-        for (String stockSymbol : prices.keySet()) {
-            prices.put(stockSymbol, prices.get(stockSymbol) * (1 + (rand.nextDouble() - 0.5) / 10));
+        for (String currencyPair : prices.keySet()) {
+            prices.put(currencyPair, prices.get(currencyPair) * (1 + (rand.nextDouble() - 0.5) / 10));
         }
     }
 

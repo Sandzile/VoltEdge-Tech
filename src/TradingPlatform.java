@@ -6,7 +6,7 @@ import java.util.Map;
 public class TradingPlatform {
     private Map<String, User> users;
     private List<Trades> trades;
-    private PriceService priceService;
+    public PriceService priceService;
     private TransactionHistory transactionHistory;
 
     public TradingPlatform() {
